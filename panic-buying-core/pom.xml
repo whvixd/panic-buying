@@ -17,6 +17,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.whvixd</groupId>
+            <artifactId>panic-buying-dao</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.whvixd</groupId>
+            <artifactId>panic-buying-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
