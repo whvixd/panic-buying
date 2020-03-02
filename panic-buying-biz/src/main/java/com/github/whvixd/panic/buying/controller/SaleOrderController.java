@@ -3,6 +3,7 @@ package com.github.whvixd.panic.buying.controller;
 import com.github.whvixd.panic.buying.model.Result;
 import com.github.whvixd.panic.buying.model.SaleOrderVO;
 import com.github.whvixd.panic.buying.service.SaleOrderService;
+import com.github.whvixd.panic.buying.util.model.annotation.RateLimit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ public class SaleOrderController {
     private SaleOrderService saleOrderService;
 
     @PostMapping("/create")
+    @RateLimit(permitsPerSecond = 100)
     public Result create(@RequestBody SaleOrderVO.Arg arg) {
         try {
             return Result.ok(saleOrderService.create(arg.getProductId()));
