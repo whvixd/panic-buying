@@ -9,4 +9,5 @@ import com.github.whvixd.panic.buying.entity.ProductDTO;
 public interface ProductService {
     Long create(ProductDTO productDTO);
 
+    ProductDTO get(Long id);
 }

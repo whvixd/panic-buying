@@ -44,7 +44,7 @@ public class Result extends BaseResult{
 
     public static Result fail(String message) {
         return new Result()
-                .code(ResultCode.BAD_REQUEST)
+                .code(ResultCode.INTERNAL_SERVER_ERROR)
                 .message(message);
     }
 }

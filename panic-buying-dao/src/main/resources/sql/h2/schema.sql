@@ -1,14 +1,18 @@
 -- 产品
-create table if not exists PRODUCT (
-PRODUCT_ID int not null primary key auto_increment,
-PRODUCT_NAME varchar(100) not null,
-PRODUCT_TOTAL int not null,
-PRODUCT_SOLD int not null,
-PRODUCT_VERSION int);
+DROP TABLE IF EXISTS PRODUCT;
+CREATE TABLE PRODUCT (
+  PRODUCT_ID      INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  PRODUCT_NAME    VARCHAR(100) NOT NULL,
+  PRODUCT_TOTAL   INT          NOT NULL,
+  PRODUCT_SOLD    INT          NOT NULL,
+  PRODUCT_VERSION INT
+);
 
 -- 订单
-create table if not exists SALE_ORDER (
-ORDER_ID int not null primary key auto_increment,
-PRODUCT_ID int not null,
-ORDER_NAME varchar(100) not null,
-CREATE_TIME timestamp not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+DROP TABLE IF EXISTS SALE_ORDER;
+CREATE TABLE SALE_ORDER (
+  ORDER_ID    INT             NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  PRODUCT_ID  INT             NOT NULL,
+  ORDER_NAME  VARCHAR(100)    NOT NULL,
+  CREATE_TIME LONGVARCHAR(20) NOT NULL
+);
