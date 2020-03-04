@@ -1,6 +1,6 @@
 package com.github.whvixd.panic.buying.biz.controller;
 
-import com.github.whvixd.panic.PanicBuyingBizApplication;
+import com.github.whvixd.PanicBuyingBizApplication;
 import com.github.whvixd.panic.buying.biz.BaseTest;
 import com.github.whvixd.panic.buying.model.Result;
 import com.github.whvixd.panic.buying.model.SaleOrderVO;
