@@ -32,7 +32,7 @@ public class SaleOrderInterfaceAspect {
             Long productId = arg.getProductId();
             int count = cacheManager.add(productId);
             // TODO: 2020/3/2 添加配置
-            if (count < 1 || count > 100) {
+            if (count < 0 || count > 100) {
                 // TODO: 2020/3/2 改为跑出业务异常
                 throw new RuntimeException();
             }

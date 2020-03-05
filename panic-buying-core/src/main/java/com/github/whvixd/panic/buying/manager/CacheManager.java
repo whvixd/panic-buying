@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class CacheManager {
 
-    private Cache<Object, Object> guavaCache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.SECONDS).recordStats().initialCapacity(100).build();
+    private Cache<Object, Object> guavaCache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.SECONDS).recordStats().initialCapacity(100).build();
 
     private AtomicInteger count = new AtomicInteger(1);
 
