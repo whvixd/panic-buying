@@ -2,6 +2,7 @@ package com.github.whvixd.panic.buying.service.impl;
 
 import com.github.whvixd.panic.buying.entity.ProductDTO;
 import com.github.whvixd.panic.buying.model.SaleOrder;
+import com.github.whvixd.panic.buying.processor.producer.SaleOrderProducer;
 import com.github.whvixd.panic.buying.repository.SaleOrderRepository;
 import com.github.whvixd.panic.buying.service.ProductService;
 import com.github.whvixd.panic.buying.service.SaleOrderService;
@@ -20,6 +21,9 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     @Autowired
     private SaleOrderRepository saleOrderRepository;
 
+    @Autowired
+    private SaleOrderProducer saleOrderProducer;
+
     @Override
     public Long create(Long productId) {
         ProductDTO product = productService.get(productId);
@@ -28,5 +32,10 @@ public class SaleOrderServiceImpl implements SaleOrderService {
         saleOrder.setName(product.getName());
         saleOrder.setCreateTime(System.currentTimeMillis());
         return saleOrderRepository.save(saleOrder).getId();
+    }
+
+    @Override
+    public void asyncCreate(Long productId) {
+        saleOrderProducer.send(productId);
     }
 }

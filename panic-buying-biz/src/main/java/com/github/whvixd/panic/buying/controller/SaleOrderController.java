@@ -24,7 +24,8 @@ public class SaleOrderController {
     @RateLimit(permitsPerSecond = 100)
     public Result create(@RequestBody SaleOrderVO.Arg arg) {
         try {
-            return Result.ok(saleOrderService.create(arg.getProductId()));
+            saleOrderService.asyncCreate(arg.getProductId());
+            return Result.ok();
         } catch (Exception e) {
             return Result.fail(e.getMessage());
         }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by wangzhx on 2020/3/2.
@@ -17,6 +18,8 @@ public class CacheManager {
     private Cache<Object, Object> guavaCache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.SECONDS).recordStats().initialCapacity(100).build();
 
     private AtomicInteger count = new AtomicInteger(1);
+
+    private final ReentrantLock reentrantLock = new ReentrantLock();
 
     /**
      * 获取值，或没有put(key,1)
@@ -38,7 +41,13 @@ public class CacheManager {
     }
 
     public int add(Object k) {
-        synchronized (this) {
+        try {
+            //持有锁的线程长期不释放的时候，正在等待的线程可以选择放弃等待
+            reentrantLock.lockInterruptibly();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        try {
             Object v = get(k);
             if (v == null) {
                 put(k, count.get());
@@ -46,6 +55,8 @@ public class CacheManager {
                 put(k, count.incrementAndGet());
             }
             return (int) get(k);
+        } finally {
+            reentrantLock.unlock();
         }
     }
 

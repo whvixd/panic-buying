@@ -5,4 +5,6 @@ package com.github.whvixd.panic.buying.service;
  */
 public interface SaleOrderService {
     Long create(Long productId);
+
+    void asyncCreate(Long productId);
 }
