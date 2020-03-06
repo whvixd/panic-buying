@@ -23,7 +23,8 @@ public class BlockQueueManager {
         try {
             blockingQueue.put(o);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("BlockQueueManager error ", e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -35,6 +36,10 @@ public class BlockQueueManager {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public boolean isEmpty() {
+        return blockingQueue.isEmpty();
     }
 
 }
