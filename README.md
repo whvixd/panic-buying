@@ -1,5 +1,5 @@
-# panic-buying
-panic buying
+# panic buying
+> 抢购项目，仅用于单机环境
 
 ### todo
 1. 本地环境 cache、h2、queue，添加另一组环境，用redis、mysql、mq
