@@ -50,7 +50,7 @@ public class SaleOrderControllerTest extends BaseTest {
     }
 
     @Test
-    @PerfTest(invocations = 1000, threads = 10)
+    @PerfTest(invocations = 200, threads = 20)
     public void restCreateTest() throws Exception {
         SaleOrderVO.Arg arg = new SaleOrderVO.Arg();
         arg.setProductId(1L);
