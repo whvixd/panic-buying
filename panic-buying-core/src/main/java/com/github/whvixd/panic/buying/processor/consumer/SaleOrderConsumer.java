@@ -1,6 +1,7 @@
 package com.github.whvixd.panic.buying.processor.consumer;
 
 import com.github.whvixd.panic.buying.manager.BlockQueueManager;
+import com.github.whvixd.panic.buying.service.ProductService;
 import com.github.whvixd.panic.buying.service.SaleOrderService;
 import com.github.whvixd.panic.buying.util.InvokeTask;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,9 @@ public class SaleOrderConsumer {
     @Autowired
     private SaleOrderService saleOrderService;
 
+    @Autowired
+    private ProductService productService;
+
     @PostConstruct
     public void start() {
         InvokeTask.newInstance(this::create).invokeTaskName("SaleOrderConsumerThread").start();
@@ -35,15 +39,17 @@ public class SaleOrderConsumer {
                 continue;
             }
             Object o = blockQueueManager.pull();
-            Long produceId;
+            Long productId;
             if (o instanceof Long) {
-                produceId = (Long) o;
+                productId = (Long) o;
             } else {
                 log.warn("class not match,element class:{}", o.getClass().getName());
                 continue;
             }
-            saleOrderService.create(produceId);
-            log.info("consumer create success,produceId:{}", produceId);
+            long count = saleOrderService.count(productId);
+            productService.update(productId, null, null, count);
+            saleOrderService.create(productId);
+            log.info("consumer create success,productId:{}", productId);
         }
     }
 }

@@ -21,7 +21,7 @@ public class SaleOrderController {
     private SaleOrderService saleOrderService;
 
     @PostMapping("/create")
-    @RateLimit(permitsPerSecond = 100)
+    @RateLimit(permitsPerSecond = 10)
     public Result create(@RequestBody SaleOrderVO.Arg arg) {
         try {
             saleOrderService.asyncCreate(arg.getProductId());

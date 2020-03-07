@@ -1,36 +1,65 @@
 package com.github.whvixd.panic.buying.biz.controller;
 
-import com.github.whvixd.PanicBuyingBizApplication;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.whvixd.panic.buying.biz.BaseTest;
-import com.github.whvixd.panic.buying.model.Result;
+import com.github.whvixd.panic.buying.controller.SaleOrderController;
 import com.github.whvixd.panic.buying.model.SaleOrderVO;
-import com.github.whvixd.panic.buying.util.FastJsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
  * Created by wangzhx on 2020/3/2.
  */
 @Slf4j
-@SpringBootTest(classes = PanicBuyingBizApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@WebAppConfiguration
 public class SaleOrderControllerTest extends BaseTest {
 
-
     @Autowired
-    private TestRestTemplate testRestTemplate;
+    private SaleOrderController saleOrderController;
+
+    private MockMvc mockMvc;
+
+    private ObjectMapper mapper = new ObjectMapper();
+
+    private TestRestTemplate testRestTemplate = new TestRestTemplate();
+
+    @Rule
+    public ContiPerfRule contiPerfRule = new ContiPerfRule();
+
+    @Before
+    public void setupMockMvc() throws Exception {
+        mockMvc = MockMvcBuilders.standaloneSetup(saleOrderController).build();
+    }
 
     @Test
-    public void createTest() {
-        String url = "http://localhost:8080/sale/order/create";
+    @PerfTest(invocations = 1000, threads = 10)
+    public void restCreateTest() throws Exception {
         SaleOrderVO.Arg arg = new SaleOrderVO.Arg();
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-        params.add("arg", arg);
-        Result result = testRestTemplate.postForObject(url, params, Result.class);
-        log.info("resultResponseEntity:{}", FastJsonUtil.toJsonWithNull(result));
+        arg.setProductId(1L);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/sale/order/create")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(mapper.writeValueAsString(arg)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(MockMvcResultHandlers.print());
     }
 }

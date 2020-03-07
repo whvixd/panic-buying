@@ -31,7 +31,9 @@ public class SaleOrderInterfaceAspect {
             SaleOrderVO.Arg arg = (SaleOrderVO.Arg) args[0];
             Long productId = arg.getProductId();
             int count = cacheManager.add(productId);
+            log.info("add count:{}", count);
             // TODO: 2020/3/2 添加配置
+            //堵塞线程数
             if (count < 0 || count > 100) {
                 // TODO: 2020/3/2 改为跑出业务异常
                 throw new RuntimeException();
@@ -45,7 +47,8 @@ public class SaleOrderInterfaceAspect {
         if (args[0] instanceof SaleOrderVO.Arg) {
             SaleOrderVO.Arg arg = (SaleOrderVO.Arg) args[0];
             Long productId = arg.getProductId();
-            cacheManager.subtract(productId);
+            int count = cacheManager.subtract(productId);
+            log.info("subtract count:{}", count);
         }
     }
 }

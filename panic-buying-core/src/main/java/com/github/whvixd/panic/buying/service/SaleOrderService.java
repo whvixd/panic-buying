@@ -7,4 +7,8 @@ public interface SaleOrderService {
     Long create(Long productId);
 
     void asyncCreate(Long productId);
+
+    long count();
+
+    long count(Long productId);
 }
