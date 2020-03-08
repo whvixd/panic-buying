@@ -21,10 +21,10 @@ public class SaleOrderController {
     private SaleOrderService saleOrderService;
 
     @PostMapping("/create")
-    @RateLimit(permitsPerSecond = 10)
+//    @RateLimit(permitsPerSecond = 10)
     public Result create(@RequestBody SaleOrderVO.Arg arg) {
         try {
-            saleOrderService.asyncCreate(arg.getProductId());
+            saleOrderService.create(arg.getProductId());
             return Result.ok();
         } catch (Exception e) {
             return Result.fail(e.getMessage());

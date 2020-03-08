@@ -30,6 +30,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 
     @Override
     public Long create(Long productId) {
+        productService.update(productId, null, null, count(productId));
         ProductDTO product = productService.get(productId);
         if (product.getTotal() <= product.getSold()) {
             log.error("product:{} oversold", product);

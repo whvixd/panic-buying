@@ -48,8 +48,6 @@ public class SaleOrderConsumer {
                         log.warn("class not match,element class:{}", o.getClass().getName());
                         continue;
                     }
-                    long count = saleOrderService.count(productId);
-                    productService.update(productId, null, null, count);
                     saleOrderService.create(productId);
                     log.info("consumer create success,productId:{}", productId);
                 } catch (Exception e) {

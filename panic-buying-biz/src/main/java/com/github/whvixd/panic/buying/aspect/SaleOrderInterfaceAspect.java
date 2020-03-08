@@ -24,7 +24,7 @@ public class SaleOrderInterfaceAspect {
     private CacheManager cacheManager;
 
 
-    @Before("execution(public * com.github.whvixd.panic.buying.controller.SaleOrderController.create(*))")
+//    @Before("execution(public * com.github.whvixd.panic.buying.controller.SaleOrderController.create(*))")
     public void lock(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         if (args[0] instanceof SaleOrderVO.Arg) {
@@ -41,7 +41,7 @@ public class SaleOrderInterfaceAspect {
         }
     }
 
-    @After("execution(public * com.github.whvixd.panic.buying.controller.SaleOrderController.create(*))")
+//    @After("execution(public * com.github.whvixd.panic.buying.controller.SaleOrderController.create(*))")
     public void unLock(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         if (args[0] instanceof SaleOrderVO.Arg) {
