@@ -1,5 +1,6 @@
 package com.github.whvixd.panic.buying.manager;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 @Slf4j
 public class BlockQueueManager {
 
-    private BlockingQueue<Object> blockingQueue = new LinkedBlockingDeque<>(100);
+    private final BlockingQueue<Object> blockingQueue = new LinkedBlockingDeque<>(100);
 
     public void offer(Object o) {
         blockingQueue.offer(o);

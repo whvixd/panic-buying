@@ -1,6 +1,8 @@
 package com.github.whvixd.panic.buying.service.impl;
 
 import com.github.whvixd.panic.buying.entity.ProductDTO;
+import com.github.whvixd.panic.buying.exception.CheckOversoldException;
+import com.github.whvixd.panic.buying.exception.base.BusinessExceptionCode;
 import com.github.whvixd.panic.buying.model.SaleOrder;
 import com.github.whvixd.panic.buying.processor.producer.SaleOrderProducer;
 import com.github.whvixd.panic.buying.repository.SaleOrderRepository;
@@ -31,8 +33,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
         ProductDTO product = productService.get(productId);
         if (product.getTotal() <= product.getSold()) {
             log.error("product:{} oversold", product);
-            // TODO: 2020/3/7 业务异常
-            throw new RuntimeException(String.format("%s oversold", product.getName()));
+            throw new CheckOversoldException(BusinessExceptionCode.CHECK_OVERSOLD_EXCEPTION, product.getName());
         }
         SaleOrder saleOrder = new SaleOrder();
         saleOrder.setProductId(productId);

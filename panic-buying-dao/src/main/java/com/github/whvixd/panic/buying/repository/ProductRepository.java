@@ -11,11 +11,10 @@ import java.util.Optional;
  * Created by wangzhx on 2020/3/1.
  */
 @Repository
-
+@Transactional
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Override
-    @Transactional
     Product save(Product product);
 
     @Override

@@ -1,6 +1,8 @@
 package com.github.whvixd.panic.buying.service.impl;
 
 import com.github.whvixd.panic.buying.entity.ProductDTO;
+import com.github.whvixd.panic.buying.exception.CheckOversoldException;
+import com.github.whvixd.panic.buying.exception.base.BusinessExceptionCode;
 import com.github.whvixd.panic.buying.model.Product;
 import com.github.whvixd.panic.buying.repository.ProductRepository;
 import com.github.whvixd.panic.buying.service.ProductService;
@@ -52,10 +54,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void checkOversold(Long id) {
+        // TODO: 2020/3/8 添加缓存
         ProductDTO productDTO = get(id);
         if (productDTO.getTotal() <= productDTO.getSold()) {
             log.error("product:{} oversold", productDTO);
-            throw new RuntimeException(String.format("%s oversold", productDTO.getName()));
+            throw new CheckOversoldException(BusinessExceptionCode.CHECK_OVERSOLD_EXCEPTION, productDTO.getName());
         }
     }
 

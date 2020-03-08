@@ -1,6 +1,6 @@
 package com.github.whvixd.panic.buying.aspect;
 
-import com.github.whvixd.panic.buying.util.model.annotation.RateLimit;
+import com.github.whvixd.panic.buying.model.annotation.RateLimit;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class RateLimitAspect {
 
     private Map<String, RateLimiter> rateLimiterMap = Maps.newConcurrentMap();
 
-    @Before(value = "@annotation(com.github.whvixd.panic.buying.util.model.annotation.RateLimit)")
+    @Before(value = "@annotation(com.github.whvixd.panic.buying.model.annotation.RateLimit)")
     public void limit(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();

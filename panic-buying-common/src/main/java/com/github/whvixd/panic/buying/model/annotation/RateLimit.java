@@ -1,4 +1,4 @@
-package com.github.whvixd.panic.buying.util.model.annotation;
+package com.github.whvixd.panic.buying.model.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
