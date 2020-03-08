@@ -1,9 +1,6 @@
 package com.github.whvixd.panic.buying.util;
 
-import lombok.Getter;
 import lombok.Setter;
-
-import javax.swing.plaf.nimbus.State;
 
 /**
  * Created by wangzhx on 2020/3/8.
@@ -11,7 +8,6 @@ import javax.swing.plaf.nimbus.State;
 public enum Lock {
     instance;
 
-    @Getter
     @Setter
     private Thread.State threadState;
 

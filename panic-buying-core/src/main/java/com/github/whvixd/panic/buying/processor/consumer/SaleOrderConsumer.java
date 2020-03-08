@@ -34,7 +34,6 @@ public class SaleOrderConsumer {
     }
 
     private void create() {
-        // TODO: 2020/3/6 需要优化，cpu占用太高
         synchronized (lock) {
             for (;;) {
                 try {

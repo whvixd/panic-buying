@@ -4,23 +4,20 @@ import org.springframework.beans.BeanUtils;
 
 import java.util.function.BiConsumer;
 
-/**
- * 无参构造器之间的类型转换
- */
 public class BeanUtil {
 
-    public static <Source, Target> Target transfer(Source source, Class<Target> target) {
-        return transfer(source, target, null);
+    public static <Source, Target> Target transfer(Source source, Class<Target> targetClass) {
+        return transfer(source, targetClass, null);
     }
 
-    public static <Source, Target> Target transfer(Source source, Class<Target> target, Processor<Source, Target> processor) {
+    public static <Source, Target> Target transfer(Source source, Class<Target> targetClass, Processor<Source, Target> processor) {
         try {
-            Target after = target.getDeclaredConstructor().newInstance();
-            BeanUtils.copyProperties(source, after);
+            Target target = targetClass.getDeclaredConstructor().newInstance();
+            BeanUtils.copyProperties(source, target);
             if (processor != null) {
-                processor.accept(source, after);
+                processor.accept(source, target);
             }
-            return after;
+            return target;
         } catch (Exception e) {
             throw new RuntimeException("Class Cast Error!");
         }
