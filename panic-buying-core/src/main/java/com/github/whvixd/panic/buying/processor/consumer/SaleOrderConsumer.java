@@ -25,9 +25,6 @@ public class SaleOrderConsumer {
     @Autowired
     private SaleOrderService saleOrderService;
 
-    @Autowired
-    private ProductService productService;
-
     @PostConstruct
     public void start() {
         InvokeTask.newInstance(this::create).invokeTaskName("SaleOrderConsumerThread").start();

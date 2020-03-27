@@ -39,8 +39,6 @@ public class SaleOrderControllerTest extends BaseTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    private TestRestTemplate testRestTemplate = new TestRestTemplate();
-
     @Rule
     public ContiPerfRule contiPerfRule = new ContiPerfRule();
 

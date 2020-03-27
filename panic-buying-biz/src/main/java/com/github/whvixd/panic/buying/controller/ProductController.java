@@ -5,6 +5,7 @@ import com.github.whvixd.panic.buying.model.ProductVO;
 import com.github.whvixd.panic.buying.model.Result;
 import com.github.whvixd.panic.buying.service.ProductService;
 import com.github.whvixd.panic.buying.model.annotation.RateLimit;
+import com.github.whvixd.panic.buying.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,10 +25,7 @@ public class ProductController {
     @PostMapping("create")
     @RateLimit
     public Result create(@RequestBody ProductVO.Arg arg) {
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setName(arg.getName());
-        productDTO.setSold(arg.getSold());
-        productDTO.setTotal(arg.getTotal());
+        ProductDTO productDTO = BeanUtil.transfer(arg, ProductDTO.class);
         try {
             return Result.ok(productService.create(productDTO));
         } catch (Exception e) {
