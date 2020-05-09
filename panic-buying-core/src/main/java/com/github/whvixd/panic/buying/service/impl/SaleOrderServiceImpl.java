@@ -11,6 +11,7 @@ import com.github.whvixd.panic.buying.service.SaleOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by wangzhx on 2020/3/2.
@@ -29,6 +30,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     private SaleOrderProducer saleOrderProducer;
 
     @Override
+    @Transactional
     public Long create(Long productId) {
         productService.update(productId, null, null, count(productId));
         ProductDTO product = productService.get(productId);

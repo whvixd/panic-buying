@@ -23,7 +23,6 @@ public class SaleOrderInterfaceAspect {
     @Autowired
     private CacheManager cacheManager;
 
-
     @Before("execution(public * com.github.whvixd.panic.buying.controller.SaleOrderController.create(*))")
     public void lock(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();

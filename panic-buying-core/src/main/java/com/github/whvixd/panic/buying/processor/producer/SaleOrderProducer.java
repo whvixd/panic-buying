@@ -17,6 +17,7 @@ public class SaleOrderProducer {
     private final Lock lock = Lock.instance;
 
     @Async
+    // TODO: 2020/5/9 有问题，方法异步后，代码块同步
     public void send(Object message) {
         synchronized (lock) {
             blockQueueManager.put(message);
