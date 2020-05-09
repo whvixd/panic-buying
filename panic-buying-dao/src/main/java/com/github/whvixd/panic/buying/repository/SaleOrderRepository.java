@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by wangzhx on 2020/3/1.
  */
 @Repository
-@Transactional
 public interface SaleOrderRepository extends JpaRepository<SaleOrder, Long> {
 
     @Override
+    @Transactional
     SaleOrder save(SaleOrder saleOrder);
 
     @Query("select count(productId) from SaleOrder where productId=:productId")
