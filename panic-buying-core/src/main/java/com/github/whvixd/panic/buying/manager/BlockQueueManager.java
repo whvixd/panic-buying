@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by wangzhx on 2020/3/5.
@@ -13,7 +13,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 @Slf4j
 public class BlockQueueManager {
 
-    private final BlockingQueue<Object> blockingQueue = new LinkedBlockingDeque<>(100);
+    private final BlockingQueue<Object> blockingQueue = new LinkedBlockingQueue<>(100);
 
     public void offer(Object o) {
         blockingQueue.offer(o);

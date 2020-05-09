@@ -1,7 +1,6 @@
 package com.github.whvixd.panic.buying.processor.consumer;
 
 import com.github.whvixd.panic.buying.manager.BlockQueueManager;
-import com.github.whvixd.panic.buying.service.ProductService;
 import com.github.whvixd.panic.buying.service.SaleOrderService;
 import com.github.whvixd.panic.buying.util.InvokeTask;
 import com.github.whvixd.panic.buying.util.Lock;
