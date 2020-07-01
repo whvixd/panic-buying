@@ -24,10 +24,15 @@ public class DBUtil {
      * @return 分表名称
      */
     public String getTableName(String id, String tableName, int mod) {
+        // 校验参数
         CheckUtil.checkArgs(id, tableName);
+        // md5加密
         String md5Hex = DigestUtils.md5Hex(id);
+        // 取后三位
         String md5HexSub = md5Hex.substring(md5Hex.length() - 3);
+        // 转int
         int num = Integer.valueOf(md5HexSub, 16);
+        // 取模获取分表
         int index = num % mod;
         return tableName + "_" + index;
     }
