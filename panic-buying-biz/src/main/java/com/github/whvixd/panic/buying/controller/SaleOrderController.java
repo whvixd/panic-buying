@@ -30,4 +30,6 @@ public class SaleOrderController {
             return Result.fail(e.getMessage());
         }
     }
+
+    // TODO: 2020/7/1 添加查询接口
 }

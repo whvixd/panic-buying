@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-@Table(name = "SALE_ORDER")
+@Table(name = SaleOrder.Constant.TABLE_NAME)
 public class SaleOrder {
 
     @Id
@@ -25,4 +25,10 @@ public class SaleOrder {
 
     @Column(name = "CREATE_TIME")
     private Long createTime;
+
+    public interface Constant{
+        String TABLE_NAME="SALE_ORDER";
+        // 表数量
+        Integer TABLE_MOD=3;
+    }
 }

@@ -14,7 +14,8 @@ public enum BusinessExceptionCode {
     /**
      * error
      */
-    ARG_VALIDATE_ERROR(5_01, "参数校验错误");
+    ARG_VALIDATE_ERROR(5_01, "参数校验错误"),
+    SYSTEM_ERROR(5_02, "系统异常");
 
     private int errorCode;
     private String errorMessage;
