@@ -20,6 +20,7 @@ public class PingController {
 
     // TODO: 2020/6/4 源码阅读，解析方式，添加到博客中
     // curl -X GET 'http://localhost:8080/test?name=test&nickName=test'
+    // 从 入口 FrameworkServlet
     @RequestMapping("/test")
     public BaseResult test(TestA testA,TestB testB){
         if("test".equals(testA.getName())&&"test".equals(testB.getNickName())){
