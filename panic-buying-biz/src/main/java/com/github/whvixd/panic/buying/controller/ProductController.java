@@ -7,10 +7,7 @@ import com.github.whvixd.panic.buying.service.ProductService;
 import com.github.whvixd.panic.buying.model.annotation.RateLimit;
 import com.github.whvixd.panic.buying.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by wangzhx on 2020/3/1.
@@ -24,6 +21,7 @@ public class ProductController {
 
     @PostMapping("create")
     @RateLimit
+    // todo 抽出一个 BaseController ,想想如何将headers取出来，各个不需要在Controller不需要通过注释获取
     public Result create(@RequestBody ProductVO.Arg arg) {
         ProductDTO productDTO = BeanUtil.transfer(arg, ProductDTO.class);
         try {
