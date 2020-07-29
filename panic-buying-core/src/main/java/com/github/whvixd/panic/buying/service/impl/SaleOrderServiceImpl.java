@@ -35,6 +35,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 
     @Override
     @Transactional
+    // todo 实现通过注解添加 分布式锁，请求头添加userId
     public boolean create(Long productId) {
         // 更新创建售卖总数
         productService.update(productId, null, null, count(productId));
