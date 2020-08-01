@@ -19,11 +19,12 @@ public class BeanUtil {
             }
             return target;
         } catch (Exception e) {
-            throw new RuntimeException("Class Cast Error!");
+            throw new RuntimeException("Bean transfer error!",e);
         }
     }
 
-    interface Processor<Source, Target> extends BiConsumer<Source, Target> {
+    // 支持自定义修改字段
+    public interface Processor<Source, Target> extends BiConsumer<Source, Target> {
     }
 
 }
