@@ -27,7 +27,7 @@ public class Result extends BaseResult{
         return this;
     }
 
-    private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
+    private static final String DEFAULT_SUCCESS_MESSAGE = "success";
 
     public static Result ok() {
         return new Result()
@@ -47,4 +47,11 @@ public class Result extends BaseResult{
                 .code(ResultCode.INTERNAL_SERVER_ERROR)
                 .message(message);
     }
+
+    public static Result fail() {
+        return new Result()
+                .code(ResultCode.INTERNAL_SERVER_ERROR)
+                .message("service error");
+    }
+
 }

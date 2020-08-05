@@ -7,12 +7,13 @@ package com.github.whvixd.panic.buying.exception.base;
 public enum BusinessExceptionCode {
 
     /**
-     * exception
+     * 4_xx:exception
      */
-    CHECK_OVERSOLD_EXCEPTION(4_01,"%s oversold"),
+    CHECK_OVERSOLD_EXCEPTION(4_01,"{0} oversold"),
+    PATTERN_EXCEPTION(4_02,"{0}"),
 
     /**
-     * error
+     * 5_xx:error
      */
     ARG_VALIDATE_ERROR(5_01, "参数校验错误"),
     SYSTEM_ERROR(5_02, "系统异常");
