@@ -1,4 +1,4 @@
---- 初始化产品
+-- 初始化产品
 INSERT INTO product (product_id, name, total, sold_number, price, info, stauts, current, version, create_user, create_time, update_user, update_time)
 VALUES ('001', '小米', 100, 0, 250000, '预售', 1, 1, 1, 'whvixd', '2020-01-01 00:00:00', 'whvixd', '2020-01-01 00:00:00');
 
