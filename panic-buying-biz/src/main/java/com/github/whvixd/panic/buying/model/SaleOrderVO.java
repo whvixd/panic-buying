@@ -8,6 +8,6 @@ import lombok.Data;
 public interface SaleOrderVO {
     @Data
     class Arg {
-        private Long productId;
+        private String productId;
     }
 }

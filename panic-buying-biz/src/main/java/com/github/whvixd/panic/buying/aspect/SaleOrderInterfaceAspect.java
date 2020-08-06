@@ -34,7 +34,7 @@ public class SaleOrderInterfaceAspect {
         Object[] args = joinPoint.getArgs();
         if (args[0] instanceof SaleOrderVO.Arg) {
             SaleOrderVO.Arg arg = (SaleOrderVO.Arg) args[0];
-            Long productId = arg.getProductId();
+            String productId = arg.getProductId();
             int count = cacheManager.add(productId);
             // 堵塞线程数
             log.info("sale order interface over limit:[{},{}],current count:{}", min, max, count);
@@ -49,7 +49,7 @@ public class SaleOrderInterfaceAspect {
         Object[] args = joinPoint.getArgs();
         if (args[0] instanceof SaleOrderVO.Arg) {
             SaleOrderVO.Arg arg = (SaleOrderVO.Arg) args[0];
-            Long productId = arg.getProductId();
+            String productId = arg.getProductId();
             int count = cacheManager.subtract(productId);
             log.info("subtract count:{}", count);
         }

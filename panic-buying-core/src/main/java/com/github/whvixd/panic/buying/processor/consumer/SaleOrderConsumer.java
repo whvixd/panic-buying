@@ -37,9 +37,9 @@ public class SaleOrderConsumer {
                         lock.waiting();
                     }
                     Object o = blockQueueManager.pull();
-                    Long productId;
-                    if (o instanceof Long) {
-                        productId = (Long) o;
+                    String productId;
+                    if (o instanceof String) {
+                        productId = (String) o;
                     } else {
                         log.warn("class not match,element class:{}", o.getClass().getName());
                         continue;

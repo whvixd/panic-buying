@@ -1,8 +1,9 @@
 package com.github.whvixd.panic.buying.controller;
 
 import com.github.whvixd.panic.buying.entity.ProductDTO;
-import com.github.whvixd.panic.buying.model.ProductVO;
+import com.github.whvixd.panic.buying.model.CreateProductVO;
 import com.github.whvixd.panic.buying.model.Result;
+import com.github.whvixd.panic.buying.model.base.HttpHeaders;
 import com.github.whvixd.panic.buying.service.ProductService;
 import com.github.whvixd.panic.buying.model.annotation.RateLimit;
 import com.github.whvixd.panic.buying.util.BeanUtil;
@@ -22,7 +23,8 @@ public class ProductController {
     @PostMapping("create")
     @RateLimit
     // todo 抽出一个 BaseController ,想想如何将headers取出来，各个不需要在Controller不需要通过注释获取
-    public Result create(@RequestBody ProductVO.Arg arg) {
+    public Result create(@RequestBody CreateProductVO.Arg arg, @RequestHeader HttpHeaders headers) {
+
         ProductDTO productDTO = BeanUtil.transfer(arg, ProductDTO.class);
         try {
             return Result.ok(productService.create(productDTO));

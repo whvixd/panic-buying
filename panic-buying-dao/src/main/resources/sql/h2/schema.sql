@@ -17,7 +17,7 @@ CREATE TABLE product (
   -- 产品信息
   deleted     INT DEFAULT 0                                      NOT NULL,
   -- 是否删除，0-未删除，1-已删除
-  stauts      INT DEFAULT 0                                      NOT NULL,
+  status      INT DEFAULT 0                                      NOT NULL,
   -- 状态，0-下架，1-上架
   current     INT DEFAULT 0                                      NOT NULL,
   -- 是否当前版本，0-非 1-当前版本

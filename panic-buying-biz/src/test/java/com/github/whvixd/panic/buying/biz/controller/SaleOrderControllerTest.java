@@ -51,7 +51,7 @@ public class SaleOrderControllerTest extends BaseTest {
     @PerfTest(invocations = 200, threads = 20)
     public void restCreateTest() throws Exception {
         SaleOrderVO.Arg arg = new SaleOrderVO.Arg();
-        arg.setProductId(1L);
+        arg.setProductId("1");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/sale/order/create")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)

@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * Created by wangzhx on 2020/3/2.
  */
@@ -36,25 +38,28 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     @Override
     @Transactional
     // todo 实现通过注解添加 分布式锁，请求头添加userId
-    public boolean create(Long productId) {
+    public boolean create(String productId) {
         // 更新创建售卖总数
-        productService.update(productId, null, null, count(productId));
+
+        // todo 修改逻辑
+        long count = count(productId);
+        productService.update(productId, null, null, 1);
         ProductDTO product = productService.get(productId);
         // 超卖抛出异常
-        if (product.getTotal() <= product.getSold()) {
+        if (product.getTotal() <= product.getSoldNumber()) {
             log.error("product:{} oversold", product);
             throw new CheckOversoldException(BusinessExceptionCode.CHECK_OVERSOLD_EXCEPTION, product.getName());
         }
         SaleOrder saleOrder = new SaleOrder();
         saleOrder.setProductId(productId);
         saleOrder.setName(product.getName());
-        saleOrder.setCreateTime(System.currentTimeMillis());
+        saleOrder.setCreateTime(new Date());
         // 创建订单
         return saleOrderEntityRepository.save(saleOrder);
     }
 
     @Override
-    public void asyncCreate(Long productId) {
+    public void asyncCreate(String productId) {
         //校验不准确，收到消息的地方再次校验
         productService.checkOversold(productId);
         saleOrderProducer.send(productId);
@@ -66,7 +71,7 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     }
 
     @Override
-    public long count(Long productId) {
+    public long count(String productId) {
         return saleOrderEntityRepository.countById(productId);
     }
 }

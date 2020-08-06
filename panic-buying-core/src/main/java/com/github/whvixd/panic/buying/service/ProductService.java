@@ -9,10 +9,10 @@ import com.github.whvixd.panic.buying.entity.ProductDTO;
 public interface ProductService {
     Long create(ProductDTO productDTO);
 
-    ProductDTO update(Long id, String name, Long total, Long sold);
+    ProductDTO update(String productId, String name, Integer total, Integer soldNumber);
 
-    ProductDTO get(Long id);
+    ProductDTO get(String productId);
 
-    void checkOversold(Long id);
+    void checkOversold(String id);
 
 }

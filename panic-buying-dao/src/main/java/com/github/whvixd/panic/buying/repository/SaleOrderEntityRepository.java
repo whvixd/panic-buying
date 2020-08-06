@@ -22,7 +22,7 @@ public class SaleOrderEntityRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Long countById(Long productId) {
+    public Integer countById(String productId) {
         CheckUtil.checkArgs(productId);
 
         String sqlFormat = "select count(PRODUCT_ID) from %s where PRODUCT_ID=%s";
@@ -32,7 +32,7 @@ public class SaleOrderEntityRepository {
         log.info("SaleOrderEntityRepository.countById sql:{}", sql);
         try {
             Query query = entityManager.createNativeQuery(sql);
-            return ((BigInteger) query.getSingleResult()).longValue();
+            return ((BigInteger) query.getSingleResult()).intValue();
         } catch (Exception e) {
             log.error("SaleOrderEntityRepository.countById error, productId:{}", productId, e);
             throw new BusinessException(BusinessExceptionCode.SYSTEM_ERROR);
@@ -40,7 +40,7 @@ public class SaleOrderEntityRepository {
     }
 
     public boolean save(SaleOrder saleOrder) {
-        Long productId = saleOrder.getProductId();
+        String productId = saleOrder.getProductId();
         CheckUtil.checkArgs(productId);
 
         String sqlFormat = "insert into %s (PRODUCT_ID,ORDER_NAME,CREATE_TIME) values(?,?,?)";
