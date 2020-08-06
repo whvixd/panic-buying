@@ -21,6 +21,7 @@
 10. 添加异常处理类
 11. 产品表添加CRUD，订单提供查询和删除接口(逻辑删)
 12. mock 支付接口，https调用，添加支付日志表
+13. 添加 log4j2.xml，记录调用traceId
 ```
 
 ### done:
@@ -31,3 +32,20 @@
 6. done
 10. done
 ```
+
+### check list
+todo | todo_date | todo_user | done | done_date | done_user
+---|---|---|---|---|---
+本地环境 cache、h2、queue，添加另一组环境，用redis、mysql、mq | 2020/3/6 | whvixd | - | - | -
+消费者用socket方式进行消费 | 2020/3/6 | whvixd | - | - | -
+添加配置文件，不需要本地写死 | 2020/3/6 | whvixd | Yes | 2020/8/6 | whvixd
+优化异常 | 2020/3/6 | whvixd | Y | 2020/7/1 | whvixd 
+完善测试 | 2020/3/7 | whvixd| Y | 2020/7/1 | whvixd
+订单进行分表 | 2020/7/1 | whvixd | Y | 2020/7/1 | whvixd
+实现通过注解添加 分布式锁(lua)，请求头添加userId | 2020/7/29 | whvixd | - | - | -
+优化表结构 | 2020/8/5 | whvixd | - | - | - 
+添加入参参数校验 | 2020/8/5 | whvixd | - | - | - 
+添加异常处理类 | 2020/8/5 | whvixd | Y | 2020/8/5 | - | - | -
+产品表添加CRUD，订单提供查询和删除接口(逻辑删) | 2020/8/5 | whvixd | - | - | -
+mock 支付接口，https调用，添加支付日志表 | 2020/8/5 | whvixd | - | - | -
+添加 log4j2.xml，记录调用traceId | 2020/8/5 | whvixd | - | - | -

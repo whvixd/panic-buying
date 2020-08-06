@@ -1,0 +1,3 @@
+SaleOrderInterface:
+  minNumber: 0
+  maxNumber: 100
