@@ -45,3 +45,5 @@ mock 支付接口，https调用，添加支付日志表 | 2020/8/5 | whvixd | - 
 1. 2020/8/6 修改product/sale_order_x 表结构
 
 > h2 没有 comment
+
+2. 2020/8/7 添加常量及工具类
