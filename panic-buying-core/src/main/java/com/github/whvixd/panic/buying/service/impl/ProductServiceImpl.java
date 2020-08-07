@@ -7,11 +7,14 @@ import com.github.whvixd.panic.buying.model.Product;
 import com.github.whvixd.panic.buying.repository.ProductRepository;
 import com.github.whvixd.panic.buying.service.ProductService;
 import com.github.whvixd.panic.buying.util.BeanUtil;
+import com.github.whvixd.panic.buying.util.IdUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static com.github.whvixd.panic.buying.model.Constants.*;
 
 /**
  * Created by wangzhx on 2020/3/1.
@@ -25,9 +28,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Long create(ProductDTO productDTO) {
         Product product = new Product();
-        product.setTotal(productDTO.getTotal());
-        product.setName(productDTO.getName());
-        product.setSoldNumber(productDTO.getSoldNumber());
+        BeanUtil.transfer(productDTO, Product.class, (src, t) -> {
+            t.setProductId(IdUtil.generate(Business.PRODUCT, Business.V_1));
+            t.setDeleted(DBSymbol.TRUE);
+            t.setStatusIfAbsent(Business.ON_SHELF);
+            t.setCurrent(DBSymbol.CURRENT);
+            t.setVersion(Long.valueOf(IdUtil.generate()));
+        });
         return productRepository.save(product).getId();
     }
 
@@ -35,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO update(String id, String name, Integer total, Integer soldNumber) {
 //        Product product = productRepository.findById(id).get();
         // todo 查询修改
-        Product product=null;
+        Product product = null;
         if (name != null) {
             product.setName(name);
         }
@@ -52,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO get(String id) {
 //        Optional<Product> optional = productRepository.findById(id);
         // todo
-        Optional<Product> optional=null;
+        Optional<Product> optional = null;
         return optional.map(p -> BeanUtil.transfer(p, ProductDTO.class)).get();
     }
 

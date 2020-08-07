@@ -19,12 +19,12 @@ import java.util.function.BiConsumer;
 @UtilityClass
 public class BeanUtil {
 
-    // 将before转为after
-    public <Before, After> After transfer(Before before, Class<After> afterClass, Processor<Before, After> processor) {
+    // 将source转为target
+    public <Source, Target> Target transfer(Source source, Class<Target> targetClass, Processor<Source, Target> processor) {
         try {
-            After after = transfer(before, afterClass);
-            processor.accept(before, after);
-            return after;
+            Target target = transfer(source, targetClass);
+            processor.accept(source, target);
+            return target;
         } catch (Exception e) {
             throw new RuntimeException("Bean transfer error!", e);
         }
@@ -47,15 +47,15 @@ public class BeanUtil {
         }
     }
 
-    // 将Before中的字段复制到after中，注：需要setter和getter方法
-    public <Before, After> void copyProperty(Before before, After after) throws IntrospectionException {
-        PropertyDescriptor[] beforePropertyDescriptors = getPropertyDescriptor(before);
-        PropertyDescriptor[] afterPropertyDescriptors = getPropertyDescriptor(after);
+    // 将Source中的字段复制到target中，注：需要setter和getter方法
+    public <Source, Target> void copyProperties(Source source, Target target) throws IntrospectionException {
+        PropertyDescriptor[] sourcePropertyDescriptors = getPropertyDescriptor(source);
+        PropertyDescriptor[] targetPropertyDescriptors = getPropertyDescriptor(target);
         try {
-            for (PropertyDescriptor descriptor : afterPropertyDescriptors) {
-                for (PropertyDescriptor beforePropertyDescriptor : beforePropertyDescriptors) {
-                    Object value = beforePropertyDescriptor.getReadMethod().invoke(before);
-                    descriptor.getWriteMethod().invoke(after, value);
+            for (PropertyDescriptor descriptor : targetPropertyDescriptors) {
+                for (PropertyDescriptor sourcePropertyDescriptor : sourcePropertyDescriptors) {
+                    Object value = sourcePropertyDescriptor.getReadMethod().invoke(source);
+                    descriptor.getWriteMethod().invoke(target, value);
                 }
             }
         } catch (Exception e) {
@@ -63,22 +63,22 @@ public class BeanUtil {
         }
     }
 
-    public <Before, After> After transfer(Before before, Class<After> afterClass) {
+    public <Source, Target> Target transfer(Source source, Class<Target> targetClass) {
         try {
-            After after = afterClass.getDeclaredConstructor().newInstance();
-            PropertyDescriptor[] beforePropertyDescriptors = getPropertyDescriptor(before);
-            PropertyDescriptor[] afterPropertyDescriptors = getPropertyDescriptor(after);
+            Target target = targetClass.getDeclaredConstructor().newInstance();
+            PropertyDescriptor[] sourcePropertyDescriptors = getPropertyDescriptor(source);
+            PropertyDescriptor[] targetPropertyDescriptors = getPropertyDescriptor(target);
 
-            for (PropertyDescriptor descriptor : afterPropertyDescriptors) {
-                for (PropertyDescriptor beforePropertyDescriptor : beforePropertyDescriptors) {
-                    if (beforePropertyDescriptor.getName().equals(descriptor.getName())) {
-                        Object value = beforePropertyDescriptor.getReadMethod().invoke(before);
-                        descriptor.getWriteMethod().invoke(after, value);
+            for (PropertyDescriptor descriptor : targetPropertyDescriptors) {
+                for (PropertyDescriptor sourcePropertyDescriptor : sourcePropertyDescriptors) {
+                    if (sourcePropertyDescriptor.getName().equals(descriptor.getName())) {
+                        Object value = sourcePropertyDescriptor.getReadMethod().invoke(source);
+                        descriptor.getWriteMethod().invoke(target, value);
                         break;
                     }
                 }
             }
-            return after;
+            return target;
         } catch (Exception e) {
             throw new Error(e);
         }
@@ -94,7 +94,7 @@ public class BeanUtil {
     }
 
     // 支持自定义修改字段
-    public interface Processor<Before, After> extends BiConsumer<Before, After> {
+    public interface Processor<Source, Target> extends BiConsumer<Source, Target> {
     }
 
 

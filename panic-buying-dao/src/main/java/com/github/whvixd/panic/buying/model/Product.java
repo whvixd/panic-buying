@@ -15,7 +15,7 @@ import java.util.Date;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",unique = true)
     private Long id;
 
@@ -63,5 +63,12 @@ public class Product {
 
     @Column(name = "update_time")
     private Date updateTime;
+
+    public void setStatusIfAbsent(Integer defaultStatus){
+        if(getStatus()!=null){
+            return;
+        }
+        setStatus(defaultStatus);
+    }
 
 }

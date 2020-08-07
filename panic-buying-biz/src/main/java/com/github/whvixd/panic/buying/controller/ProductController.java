@@ -24,10 +24,8 @@ public class ProductController {
     @RateLimit
     // todo 抽出一个 BaseController ,想想如何将headers取出来，各个不需要在Controller不需要通过注释获取
     public Result create(@RequestBody CreateProductVO.Arg arg, @RequestHeader HttpHeaders headers) {
-
-        ProductDTO productDTO = BeanUtil.transfer(arg, ProductDTO.class);
         try {
-            return Result.ok(productService.create(productDTO));
+            return Result.ok(productService.create(BeanUtil.transfer(arg, ProductDTO.class)));
         } catch (Exception e) {
             return Result.fail(e.getMessage());
         }

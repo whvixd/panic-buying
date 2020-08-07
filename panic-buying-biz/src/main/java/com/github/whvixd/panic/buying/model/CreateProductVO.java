@@ -8,8 +8,6 @@ import lombok.Data;
 public interface CreateProductVO {
     @Data
     class Arg {
-        private String productId;
-
         private String name;
 
         private Integer total;
