@@ -13,22 +13,22 @@ import java.util.concurrent.LinkedBlockingQueue;
 @Slf4j
 public class BlockQueueManager {
 
-    private final BlockingQueue<Object> blockingQueue = new LinkedBlockingQueue<>(100);
+    private final BlockingQueue<String> blockingQueue = new LinkedBlockingQueue<>(100);
 
-    public void offer(Object o) {
-        blockingQueue.offer(o);
+    public void offer(String message) {
+        blockingQueue.offer(message);
     }
 
-    public void put(Object o) {
+    public void put(String message) {
         try {
-            blockingQueue.put(o);
+            blockingQueue.put(message);
         } catch (InterruptedException e) {
             log.error("BlockQueueManager error ", e);
             throw new RuntimeException(e);
         }
     }
 
-    public Object pull() {
+    public String pull() {
         try {
             return blockingQueue.take();
         } catch (InterruptedException e) {

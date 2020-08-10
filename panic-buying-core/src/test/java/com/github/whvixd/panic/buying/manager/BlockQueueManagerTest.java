@@ -14,7 +14,7 @@ public class BlockQueueManagerTest {
         BlockQueueManager blockQueueManager = new BlockQueueManager();
 
         LongStream.range(0L, 10L).forEach(e ->
-                InvokeTask.newInstance(() -> blockQueueManager.put(e)).start());
+                InvokeTask.newInstance(() -> blockQueueManager.put(String.valueOf(e))).start());
 
         LongStream.range(0L, 10L).forEach(e ->
                 InvokeTask.newInstance(() -> System.out.println(blockQueueManager.pull())).start());
@@ -25,7 +25,7 @@ public class BlockQueueManagerTest {
         BlockQueueManager blockQueueManager = new BlockQueueManager();
 
         LongStream.range(0L, 10L).forEach(e ->
-                        blockQueueManager.put(e));
+                        blockQueueManager.put(String.valueOf(e)));
 //                InvokeTask.newInstance(() -> blockQueueManager.put(e)).start());
 
         LongStream.range(0L, 10L).forEach(e ->

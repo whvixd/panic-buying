@@ -3,7 +3,7 @@ package com.github.whvixd.panic.buying.repository;
 import com.github.whvixd.panic.buying.exception.BusinessException;
 import com.github.whvixd.panic.buying.exception.base.BusinessExceptionCode;
 import com.github.whvixd.panic.buying.model.SaleOrder;
-import com.github.whvixd.panic.buying.util.CheckUtil;
+import com.github.whvixd.panic.buying.util.AssertUtil;
 import com.github.whvixd.panic.buying.util.DBUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -23,7 +23,7 @@ public class SaleOrderEntityRepository {
     private EntityManager entityManager;
 
     public Integer countById(String productId) {
-        CheckUtil.checkArgs(productId);
+        AssertUtil.checkArgs(productId);
 
         String sqlFormat = "select count(PRODUCT_ID) from %s where PRODUCT_ID=%s";
         // 获取分表名称
@@ -41,7 +41,7 @@ public class SaleOrderEntityRepository {
 
     public boolean save(SaleOrder saleOrder) {
         String productId = saleOrder.getProductId();
-        CheckUtil.checkArgs(productId);
+        AssertUtil.checkArgs(productId);
 
         String sqlFormat = "insert into %s (PRODUCT_ID,ORDER_NAME,CREATE_TIME) values(?,?,?)";
         // 获取分表名称

@@ -25,7 +25,7 @@ public class DBUtil {
      */
     public String getTableName(String id, String tableName, int mod) {
         // 校验参数
-        CheckUtil.checkArgs(id, tableName);
+        AssertUtil.checkArgs(id, tableName);
         // md5加密
         String md5Hex = DigestUtils.md5Hex(id);
         // 取后三位

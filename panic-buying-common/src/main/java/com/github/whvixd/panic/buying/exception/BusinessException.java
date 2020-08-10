@@ -2,6 +2,8 @@ package com.github.whvixd.panic.buying.exception;
 
 import com.github.whvixd.panic.buying.exception.base.BusinessExceptionCode;
 
+import java.text.MessageFormat;
+
 /**
  * Created by wangzhx on 2020/3/8.
  */
@@ -24,9 +26,9 @@ public class BusinessException extends RuntimeException {
         super();
     }
 
-    public BusinessException(BusinessExceptionCode code) {
-        super(code.getErrorMessage());
-        this.errorCode=code.getErrorCode();
+    public BusinessException(BusinessExceptionCode code, Object... info) {
+        super(MessageFormat.format(code.getErrorMessage(), info));
+        this.errorCode = code.getErrorCode();
     }
 
 }

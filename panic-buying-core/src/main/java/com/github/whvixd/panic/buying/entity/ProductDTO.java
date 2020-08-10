@@ -25,10 +25,13 @@ public class ProductDTO {
 
     private Integer status;
 
+    // 暂未用到，原计划按version更新数据，更新soldNumber过频繁
     private Integer current;
 
+    // 暂未用到
     private String remark;
 
+    // 暂未用到
     private Long version;
 
     private String createUser;

@@ -1,7 +1,7 @@
 package com.github.whvixd.panic.buying.aspect;
 
 import com.github.whvixd.panic.buying.manager.CacheManager;
-import com.github.whvixd.panic.buying.model.SaleOrderVO;
+import com.github.whvixd.panic.buying.model.CreateSaleOrderVO;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -32,8 +32,8 @@ public class SaleOrderInterfaceAspect {
     @Before("execution(public * com.github.whvixd.panic.buying.controller.SaleOrderController.create(*))")
     public void lock(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        if (args[0] instanceof SaleOrderVO.Arg) {
-            SaleOrderVO.Arg arg = (SaleOrderVO.Arg) args[0];
+        if (args[0] instanceof CreateSaleOrderVO.Arg) {
+            CreateSaleOrderVO.Arg arg = (CreateSaleOrderVO.Arg) args[0];
             String productId = arg.getProductId();
             int count = cacheManager.add(productId);
             // 堵塞线程数
@@ -47,8 +47,8 @@ public class SaleOrderInterfaceAspect {
     @After("execution(public * com.github.whvixd.panic.buying.controller.SaleOrderController.create(*))")
     public void unLock(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
-        if (args[0] instanceof SaleOrderVO.Arg) {
-            SaleOrderVO.Arg arg = (SaleOrderVO.Arg) args[0];
+        if (args[0] instanceof CreateSaleOrderVO.Arg) {
+            CreateSaleOrderVO.Arg arg = (CreateSaleOrderVO.Arg) args[0];
             String productId = arg.getProductId();
             int count = cacheManager.subtract(productId);
             log.info("subtract count:{}", count);

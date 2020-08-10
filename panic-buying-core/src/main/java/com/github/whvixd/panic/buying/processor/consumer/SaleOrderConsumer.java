@@ -1,7 +1,9 @@
 package com.github.whvixd.panic.buying.processor.consumer;
 
+import com.github.whvixd.panic.buying.entity.SaleOrderDTO;
 import com.github.whvixd.panic.buying.manager.BlockQueueManager;
 import com.github.whvixd.panic.buying.service.SaleOrderService;
+import com.github.whvixd.panic.buying.util.FastJsonUtil;
 import com.github.whvixd.panic.buying.util.InvokeTask;
 import com.github.whvixd.panic.buying.util.Lock;
 import lombok.extern.slf4j.Slf4j;
@@ -36,16 +38,9 @@ public class SaleOrderConsumer {
                     if (blockQueueManager.isEmpty()) {
                         lock.waiting();
                     }
-                    Object o = blockQueueManager.pull();
-                    String productId;
-                    if (o instanceof String) {
-                        productId = (String) o;
-                    } else {
-                        log.warn("class not match,element class:{}", o.getClass().getName());
-                        continue;
-                    }
-                    saleOrderService.create(productId);
-                    log.info("consumer create success,productId:{}", productId);
+                    String message = blockQueueManager.pull();
+                    saleOrderService.create(FastJsonUtil.fromJson(message, SaleOrderDTO.class));
+                    log.info("consumer create success,product:{}", message);
                 } catch (Exception e) {
                     log.warn("SaleOrderConsumer thread waiting from ", e);
                     try {

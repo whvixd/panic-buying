@@ -18,7 +18,7 @@ public class SaleOrderProducer {
 
     @Async
     // TODO: 2020/5/9 有问题，方法异步后，代码块同步
-    public void send(Object message) {
+    public void send(String message) {
         synchronized (lock) {
             blockQueueManager.put(message);
             lock.notifying();

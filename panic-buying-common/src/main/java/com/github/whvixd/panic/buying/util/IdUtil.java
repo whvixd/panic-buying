@@ -11,19 +11,21 @@ import java.util.UUID;
  * （1）当前日期和时间，UUID的第一个部分与时间有关，如果你在生成一个UUID之后，过几秒又生成一个UUID，则第一个部分不同，其余相同。
  * （2）时钟序列。
  * （3）全局唯一的IEEE机器识别号，如果有网卡，从网卡MAC地址获得，没有网卡以其他方式获得。
- *
+ * <p>
  * Created by wangzhixiang on 2020/8/7.
  */
 @UtilityClass
 public class IdUtil {
+    private static final SnowFlake SNOW_FLAKE = new SnowFlake(2, 1);
+
     public String generate(String... keys) {
         String uuid = UUID.randomUUID().toString();
-        if(keys==null){
+        if (keys == null) {
             return uuid;
         }
-        StringBuilder stringBuilder=new StringBuilder();
-        for(String key:keys){
-            if(StringUtils.isNotBlank(key)){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String key : keys) {
+            if (StringUtils.isNotBlank(key)) {
                 stringBuilder.append(Constants.Symbol.UNDERLINE).append(key);
             }
         }
@@ -32,5 +34,9 @@ public class IdUtil {
 
     public String generate() {
         return generate(StringUtils.EMPTY);
+    }
+
+    public long getSnowFlakeId() {
+        return SNOW_FLAKE.nextId();
     }
 }

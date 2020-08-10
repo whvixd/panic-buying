@@ -7,7 +7,13 @@ import lombok.Data;
  */
 @Data
 public class SaleOrderDTO {
-
-    private Long productId;
+    private String name;
+    private String productId;
+    private Long payAmount;
+    private String info;
+    private String userId;
+    private String remark;
+    private Integer totalDuration;
+    private String createUser;
 
 }

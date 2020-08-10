@@ -9,7 +9,9 @@ import com.github.whvixd.panic.buying.entity.ProductDTO;
 public interface ProductService {
     Long create(ProductDTO productDTO);
 
-    ProductDTO update(String productId, String name, Integer total, Integer soldNumber);
+    ProductDTO update(String productId, String name, Integer total, Integer soldNumber, Long price, String info, String remark, String updateUser);
+
+    ProductDTO update(String productId, Integer soldNumber);
 
     ProductDTO get(String productId);
 

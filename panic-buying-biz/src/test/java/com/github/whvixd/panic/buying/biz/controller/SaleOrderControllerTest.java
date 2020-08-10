@@ -2,7 +2,7 @@ package com.github.whvixd.panic.buying.biz.controller;
 
 import com.github.whvixd.panic.buying.biz.BaseTest;
 import com.github.whvixd.panic.buying.controller.SaleOrderController;
-import com.github.whvixd.panic.buying.model.SaleOrderVO;
+import com.github.whvixd.panic.buying.model.CreateSaleOrderVO;
 import com.github.whvixd.panic.buying.util.FastJsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.databene.contiperf.PerfTest;
@@ -47,7 +47,10 @@ public class SaleOrderControllerTest extends BaseTest {
     @Test
     @PerfTest(invocations = 200, threads = 20)
     public void restCreateTest() throws Exception {
-        SaleOrderVO.Arg arg = new SaleOrderVO.Arg();
+        CreateSaleOrderVO.Arg arg = new CreateSaleOrderVO.Arg();
+        arg.setPayAmount(1000L);
+        arg.setUserId("1000");
+        arg.setTotalDuration(1);
         arg.setProductId("1");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/sale/order/create")
