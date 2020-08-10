@@ -34,8 +34,9 @@ todo | todo_date | todo_user | done | done_date | done_user
 订单进行分表 | 2020/7/1 | whvixd | Yes | 2020/7/1 | whvixd
 实现通过注解添加 分布式锁(lua)，请求头添加userId | 2020/7/29 | whvixd | - | - | -
 优化表结构 | 2020/8/5 | whvixd | - | - | - 
-添加入参参数校验 | 2020/8/5 | whvixd | - | - | - 
-添加异常处理类 | 2020/8/5 | whvixd | Yes | 2020/8/5 | - | - | -
+添加入参参数校验 | 2020/8/5 | whvixd | Yes | 2020/8/7 | whvixd 
+添加异常处理类 | 2020/8/5 | whvixd | Yes | 2020/8/5 | whvixd 
+代码逻辑修改(大改造) | 2020/8/7 | whvixd | doing | - | -
 产品表添加CRUD，订单提供查询和删除接口(逻辑删) | 2020/8/5 | whvixd | - | - | -
 mock 支付接口，https调用，添加支付日志表 | 2020/8/5 | whvixd | - | - | -
 添加 log4j2.xml，记录调用traceId | 2020/8/5 | whvixd | - | - | -
