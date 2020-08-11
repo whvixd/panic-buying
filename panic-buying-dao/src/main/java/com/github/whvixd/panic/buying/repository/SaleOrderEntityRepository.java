@@ -25,7 +25,7 @@ public class SaleOrderEntityRepository {
     public Integer countById(String productId) {
         AssertUtil.checkArgs(productId);
 
-        String sqlFormat = "select count(PRODUCT_ID) from %s where PRODUCT_ID=%s";
+        String sqlFormat = "select count(product_id) from %s where product_id=%s";
         // 获取分表名称
         String tableName = DBUtil.getTableName(String.valueOf(productId), SaleOrder.Constant.TABLE_NAME, SaleOrder.Constant.TABLE_MOD);
         String sql = String.format(sqlFormat, tableName, productId);
@@ -43,7 +43,7 @@ public class SaleOrderEntityRepository {
         String productId = saleOrder.getProductId();
         AssertUtil.checkArgs(productId);
 
-        String sqlFormat = "insert into %s (PRODUCT_ID,ORDER_NAME,CREATE_TIME) values(?,?,?)";
+        String sqlFormat = "insert into %s (product_id,order_name,create_time) values(?,?,?)";
         // 获取分表名称
         String tableName = DBUtil.getTableName(String.valueOf(productId), SaleOrder.Constant.TABLE_NAME, SaleOrder.Constant.TABLE_MOD);
         String sql = String.format(sqlFormat, tableName);

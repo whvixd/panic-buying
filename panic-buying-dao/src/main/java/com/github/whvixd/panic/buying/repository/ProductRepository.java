@@ -21,8 +21,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Override
     Optional<Product> findById(Long id);
 
-    @Query(value = "select bean from product where productId=:productId")
-    Product findByproductId(@Param("productId") String productId);
+    // todo 启动有问题
+//    @Query("select productId from product where productId=:productId")
+//    Product queryByproductId(@Param("productId") String productId);
 
 
 }

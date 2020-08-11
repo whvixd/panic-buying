@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO update(String productId, String name, Integer total, Integer soldNumber, Long price, String info, String remark, String updateUser) {
         AssertUtil.checkArgs(productId);
-        Product product = productRepository.findByproductId(productId);
+        Product product = null;
         if (product == null) {
             log.warn("product is null,productId:{}", productId);
             throw new BusinessException(BusinessExceptionCode.PATTERN_EXCEPTION, "product is null");
