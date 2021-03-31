@@ -1,6 +1,7 @@
 package com.github.whvixd.panic.buying.controller;
 
 import com.github.whvixd.panic.buying.model.Result;
+import com.github.whvixd.panic.buying.model.annotation.DLock;
 import com.github.whvixd.panic.buying.model.base.BaseResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PingController {
 
     @GetMapping("/ping")
+    @DLock
     public BaseResult ping() {
         return Result.ok("hello world!");
     }

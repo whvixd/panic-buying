@@ -11,6 +11,7 @@ public enum BusinessExceptionCode {
      */
     CHECK_OVERSOLD_EXCEPTION(4_01,"{0} oversold"),
     PATTERN_EXCEPTION(4_02,"{0}"),
+    NOT_GET_LOCK(4_03,"{0} don't get dLock"),
 
     /**
      * 5_xx:error
