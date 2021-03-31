@@ -42,3 +42,4 @@ todo | todo_date | todo_user | done | done_date | done_user
 mock 支付接口，https调用，添加支付日志表 | 2020/8/5 | whvixd | - | - | -
 添加 log4j2.xml，记录调用traceId | 2020/8/5 | whvixd | - | - | -
 添加部署脚本 | 2020/8/6 | whvixd | - | - | -
+添加分布式锁 | 2021/3/31 | whvixd | Yes | 2021/3/31 | whvixd
