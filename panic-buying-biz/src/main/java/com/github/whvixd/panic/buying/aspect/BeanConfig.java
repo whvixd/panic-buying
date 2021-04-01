@@ -1,6 +1,6 @@
 package com.github.whvixd.panic.buying.aspect;
 
-import com.github.whvixd.panic.buying.manager.RedisClientManager;
+import com.github.whvixd.panic.buying.manager.DLockClientManager;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
     @Bean
     @ConditionalOnMissingBean
-    public RedisClientManager instanceRedisClientManager(){
-        return new RedisClientManager();
+    public DLockClientManager instanceRedisClientManager(){
+        return new DLockClientManager();
     }
 }

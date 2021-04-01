@@ -24,7 +24,7 @@ public class DLockAspectTest {
         pingController.ping();
         log.info("-------");
         pingController.ping();
-        Thread.sleep(20000L);
+        Thread.sleep(10000L);
     }
 
 }

@@ -4,7 +4,7 @@ import cn.hutool.crypto.SecureUtil;
 import com.github.whvixd.panic.buying.enums.ExpireType;
 import com.github.whvixd.panic.buying.exception.BusinessException;
 import com.github.whvixd.panic.buying.exception.base.BusinessExceptionCode;
-import com.github.whvixd.panic.buying.manager.RedisManager;
+import com.github.whvixd.panic.buying.manager.DLockManager;
 import com.github.whvixd.panic.buying.model.DLockModel;
 import com.github.whvixd.panic.buying.model.annotation.DKeyAlias;
 import com.github.whvixd.panic.buying.model.annotation.DLock;
@@ -38,7 +38,7 @@ import java.util.stream.IntStream;
 public class DLockAspect {
 
     @Autowired
-    private RedisManager redisManager;
+    private DLockManager dLockManager;
 
 
     @Pointcut("@annotation(com.github.whvixd.panic.buying.model.annotation.DLock)")
@@ -84,7 +84,7 @@ public class DLockAspect {
             return false;
         }
         String redisKey = getRedisKey(lockPrefix, lockKey, idempotentId);
-        return redisManager.setnx(redisKey, "1", timeToLiveSeconds);
+        return dLockManager.setnx(redisKey, "1", timeToLiveSeconds);
     }
 
     /**
@@ -97,7 +97,7 @@ public class DLockAspect {
         String lockPrefix = dLockModel.getLockPrefix();
         String lockKey = dLockModel.getLockKey();
         String idempotentId = dLockModel.getIdempotentId();
-        redisManager.del(getRedisKey(lockPrefix, lockKey, idempotentId));
+        dLockManager.del(getRedisKey(lockPrefix, lockKey, idempotentId));
     }
 
 

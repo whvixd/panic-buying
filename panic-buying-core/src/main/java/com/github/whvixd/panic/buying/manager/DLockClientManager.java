@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * Created by wangzhixiang on 2021/3/31.
  */
 @Slf4j
-public class RedisClientManager implements RedisManager {
+public class DLockClientManager implements DLockManager {
     private Cache<String, Object> guavaCache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.SECONDS).recordStats().initialCapacity(100).build();
 
     @Override
