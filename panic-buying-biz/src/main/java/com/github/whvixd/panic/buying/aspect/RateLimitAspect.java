@@ -1,6 +1,6 @@
 package com.github.whvixd.panic.buying.aspect;
 
-import com.github.whvixd.panic.buying.exception.BusinessException;
+import com.github.whvixd.panic.buying.model.Result;
 import com.github.whvixd.panic.buying.model.annotation.RateLimit;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
@@ -45,7 +45,7 @@ public class RateLimitAspect {
         log.info("rate limit method:{}", key);
         boolean flag = rateLimiter.tryAcquire(permits);
         if (!flag) {
-            throw new BusinessException("限流");
+            Result.fail();
         }
     }
 }
