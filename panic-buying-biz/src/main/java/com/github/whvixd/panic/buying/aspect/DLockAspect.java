@@ -55,6 +55,9 @@ public class DLockAspect {
                 return proceeding.proceed();
             } catch (Throwable throwable) {
                 log.error("DLockAspect->lockAround error,message:{} ", throwable.getMessage(), throwable);
+                if (throwable instanceof BusinessException) {
+                    throw (BusinessException) throwable;
+                }
                 throw new BusinessException(BusinessExceptionCode.SYSTEM_ERROR.getErrorMessage(), throwable);
             } finally {
                 if (dLockModel.getExpireType() == ExpireType.METHOD) {
